@@ -15,3 +15,5 @@
      a. [InlineData] -> pass data Inline
      b. [MemberData] -> pass data from methods or properties
      c. [ClassData]  -> pass data from another class
+
+4. We should only test the code we write.
