@@ -1,4 +1,7 @@
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
+using System.Net;
+using UnitTesting.WebAPI.Model;
 
 namespace UnitTesting.WebAPI.Controllers
 {
@@ -18,9 +21,11 @@ namespace UnitTesting.WebAPI.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
-        public ActionResult<IEnumerable<WeatherForecast>> Get(string id)
+        [HttpGet("GetWeatherForecast")]
+        public ActionResult<IEnumerable<WeatherForecast>> GetWeatherForecast(string id)
         {
+
+
             if (id == null) return NotFound("No Data Found");
 
             return Ok(Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -30,6 +35,21 @@ namespace UnitTesting.WebAPI.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray());
+        }
+
+        [HttpGet("GetData")]
+        public ActionResult<DataModel> GetData()
+        {
+            var ip = HttpContext.Connection.RemoteIpAddress;
+            string path = HttpContext.Request.Path;
+            IPAddress remoteIp = HttpContext?.Features?.Get<IHttpConnectionFeature>()?.RemoteIpAddress
+                 ?? throw new Exception("Error");
+
+            return Ok(new DataModel
+            {
+                Path = path,
+                Ip = remoteIp.ToString()
+            });
         }
     }
 }

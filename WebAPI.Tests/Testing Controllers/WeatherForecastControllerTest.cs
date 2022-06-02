@@ -20,7 +20,7 @@ namespace WebAPI.Tests.Testing_Controllers
             WeatherForecastController weatherForecastController = new WeatherForecastController(loggerMock.Object);
 
             // Act
-            ActionResult<IEnumerable<WeatherForecast>> result = weatherForecastController.Get(id);
+            ActionResult<IEnumerable<WeatherForecast>> result = weatherForecastController.GetWeatherForecast(id);
 
             // Assert
             Assert.IsType<NotFoundObjectResult>(result.Result);
@@ -35,7 +35,7 @@ namespace WebAPI.Tests.Testing_Controllers
             WeatherForecastController weatherForecastController = new WeatherForecastController(loggerMock.Object);
 
             // Act
-            ActionResult<IEnumerable<WeatherForecast>> result = weatherForecastController.Get(id);
+            ActionResult<IEnumerable<WeatherForecast>> result = weatherForecastController.GetWeatherForecast(id);
 
             // Assert
             var data = result.Value;
@@ -51,7 +51,7 @@ namespace WebAPI.Tests.Testing_Controllers
             WeatherForecastController weatherForecastController = new WeatherForecastController(loggerMock.Object);
 
             // Act
-            ActionResult<IEnumerable<WeatherForecast>> result = weatherForecastController.Get(id);
+            ActionResult<IEnumerable<WeatherForecast>> result = weatherForecastController.GetWeatherForecast(id);
 
             // Assert
             var data = ((ObjectResult)result.Result).Value;
